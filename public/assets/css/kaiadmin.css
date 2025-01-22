@@ -874,7 +874,7 @@ body {
 }
 .sidebar .nav > .nav-item.active > a p,
 .sidebar[data-background-color="white"] .nav > .nav-item.active > a p {
-    color: #2a2f5b !important;
+    color: #3743b2 !important;
     font-weight: 600;
 }
 .sidebar .nav > .nav-item.active:hover > a:before,

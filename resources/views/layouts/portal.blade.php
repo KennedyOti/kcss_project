@@ -55,7 +55,7 @@
                     <!-- Logo Header -->
                     <div class="logo-header" data-background-color="dark">
                         <a href="{{ route('dashboard') }}" class="logo">
-                            <img src="{{ asset('assets/images/logo.jpg') }}" alt="navbar brand" class="navbar-brand"
+                            <img src="{{ asset('assets/images/logo.png') }}" alt="navbar brand" class="navbar-brand"
                                 height="50" />
                         </a>
                         <div class="nav-toggle">
@@ -100,7 +100,7 @@
                                         <div class="collapse" id="base">
                                             <ul class="nav nav-collapse">
                                                 <li>
-                                                    <a href="#">
+                                                    <a href="{{ route('user.index') }}">
                                                         <span class="sub-item">User Management</span>
                                                     </a>
                                                 </li>
@@ -209,7 +209,6 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    
                                 @break
 
                                 @case('employee')
@@ -611,7 +610,7 @@
                         </div>
                         <div>
 
-                            <a target="_blank" href="https://dijisoftwares.com/">Kwanza Images Photography</a>.
+                            <a target="_blank" href="https://dijisoftwares.com/">KCSS Portal</a>.
                         </div>
                     </div>
                 </footer>
