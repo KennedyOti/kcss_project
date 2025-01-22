@@ -1,1 +1,47 @@
-<h1>Home Page Of The Website</h1>
+@extends('layouts.app')
+
+
+@section('content')
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="display-4">Welcome to KCSS Project System</h1>
+            <p class="lead">A centralized hub for managing activities, cases, and reports efficiently.</p>
+            <a href="signup.html" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Dashboard Overview</h5>
+                            <p class="card-text">Access real-time statistics and manage activities, cases, and reports
+                                all in one place.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">User Management</h5>
+                            <p class="card-text">Manage roles, permissions, and user profiles with ease.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Analytics & Reports</h5>
+                            <p class="card-text">Generate insightful reports and visualize data with advanced analytics.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
