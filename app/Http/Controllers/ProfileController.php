@@ -39,7 +39,7 @@ class ProfileController extends Controller
         // Conditionally validate the role field if the user is an admin
         if ($request->user()->role === 'admin') {
             $validatedData['role'] = $request->validate([
-                'role' => 'in:client,employee,admin',
+                'role' => 'in:client,organization,admin',
             ])['role'];
         }
 

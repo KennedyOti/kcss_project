@@ -155,7 +155,7 @@
                                         <div class="collapse" id="forms">
                                             <ul class="nav nav-collapse">
                                                 <li>
-                                                    <a href="#">
+                                                    <a href="{{ route('cases.create') }}">
                                                         <span class="sub-item">Case Managemnt</span>
                                                     </a>
                                                 </li>
@@ -215,7 +215,7 @@
                                     </li>
                                 @break
 
-                                @case('employee')
+                                @case('organization')
                                     <li class="nav-item">
                                         <a data-bs-toggle="collapse" href="#charts">
                                             <i class="far fa-chart-bar"></i>
@@ -225,13 +225,13 @@
                                         <div class="collapse" id="charts">
                                             <ul class="nav nav-collapse">
                                                 <li>
-                                                    <a href="{{ route('sales.create') }}">
+                                                    <a href="#">
                                                         <span class="sub-item">Record Sales</span>
                                                     </a>
                                                 </li>
 
                                                 <li>
-                                                    <a href="{{ route('sales.index') }}">
+                                                    <a href="">
                                                         <span class="sub-item">Manage Sales</span>
                                                     </a>
                                                 </li>
@@ -249,7 +249,7 @@
                                         <div class="collapse" id="maps">
                                             <ul class="nav nav-collapse">
                                                 <li>
-                                                    <a href="{{ route('manageblog.index') }}">
+                                                    <a href="#">
                                                         <span class="sub-item">Manage Blogs</span>
                                                     </a>
                                                 </li>
@@ -267,7 +267,7 @@
                                         <div class="collapse" id="sidebarLayouts">
                                             <ul class="nav nav-collapse">
                                                 <li>
-                                                    <a href="{{ route('gallery.index') }}">
+                                                    <a href="#">
                                                         <span class="sub-item">Manage Gallery</span>
                                                     </a>
 
@@ -285,7 +285,7 @@
                                         <div class="collapse" id="tables">
                                             <ul class="nav nav-collapse">
                                                 <li>
-                                                    <a href="{{ route('managebookings.index') }}">
+                                                    <a href="">
                                                         <span class="sub-item">Manage Bookings</span>
                                                     </a>
                                                 </li>
