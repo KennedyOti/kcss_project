@@ -55,8 +55,8 @@
                                 <select name="role" class="form-control">
                                     <option value="client" {{ old('role', $user->role) == 'client' ? 'selected' : '' }}>
                                         Client</option>
-                                    <option value="employee" {{ old('role', $user->role) == 'employee' ? 'selected' : '' }}>
-                                        Employee</option>
+                                    <option value="organization" {{ old('role', $user->role) == 'organization' ? 'selected' : '' }}>
+                                        Organization</option>
                                     <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Admin
                                     </option>
                                 </select>

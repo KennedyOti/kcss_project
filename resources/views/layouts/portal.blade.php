@@ -116,11 +116,15 @@
                                         <div class="collapse" id="sidebarLayouts">
                                             <ul class="nav nav-collapse">
                                                 <li>
-                                                    <a href="#">
-                                                        <span class="sub-item">Activities Management</span>
+                                                    <a href="{{ route('activities.create') }}">
+                                                        <span class="sub-item">Create New Activity</span>
                                                     </a>
+                                                </li>
 
-
+                                                <li>
+                                                    <a href="{{ route('activities.index') }}">
+                                                        <span class="sub-item">Activity Management</span>
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -134,7 +138,7 @@
                                         <div class="collapse" id="sidebarLayouts">
                                             <ul class="nav nav-collapse">
                                                 <li>
-                                                    <a href="#">
+                                                    <a href="{{ route('pages.index') }}">
                                                         <span class="sub-item">Content Management</span>
                                                     </a>
 
