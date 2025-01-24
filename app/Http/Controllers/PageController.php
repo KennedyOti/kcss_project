@@ -7,17 +7,42 @@ use App\Models\Page;
 
 class PageController extends Controller
 {
-    public function index()
+    /**
+     * Display a listing of the pages with filters.
+     */
+    public function index(Request $request)
     {
-        $pages = Page::all();
-        return view('portal.content.index', compact('pages'));
+        // Get filter parameters
+        $filters = [
+            'title' => $request->input('title'),
+            'meta_title' => $request->input('meta_title'),
+        ];
+
+        // Query with filters
+        $pages = Page::query()
+            ->when($filters['title'], function ($query, $title) {
+                $query->where('title', 'like', "%{$title}%");
+            })
+            ->when($filters['meta_title'], function ($query, $metaTitle) {
+                $query->where('meta_title', 'like', "%{$metaTitle}%");
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('portal.content.index', compact('pages', 'filters'));
     }
 
+    /**
+     * Show the form for creating a new page.
+     */
     public function create()
     {
         return view('portal.content.create');
     }
 
+    /**
+     * Store a newly created page in storage.
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -32,11 +57,17 @@ class PageController extends Controller
         return redirect()->route('pages.index')->with('success', 'Page created successfully.');
     }
 
+    /**
+     * Show the form for editing the specified page.
+     */
     public function edit(Page $page)
     {
         return view('portal.content.edit', compact('page'));
     }
 
+    /**
+     * Update the specified page in storage.
+     */
     public function update(Request $request, Page $page)
     {
         $validated = $request->validate([
@@ -51,12 +82,17 @@ class PageController extends Controller
         return redirect()->route('pages.index')->with('success', 'Page updated successfully.');
     }
 
+    /**
+     * Display the specified page.
+     */
     public function show(Page $page)
     {
         return view('portal.content.show', compact('page'));
     }
 
-
+    /**
+     * Remove the specified page from storage.
+     */
     public function destroy(Page $page)
     {
         $page->delete();

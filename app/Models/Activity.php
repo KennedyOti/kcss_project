@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Activity extends Model
 {
@@ -15,16 +16,25 @@ class Activity extends Model
     // Define the fillable fields to allow mass assignment
     protected $fillable = [
         'activity_name',
+        'organization',
         'activity_description',
         'location',
+        'status',
         'start_date',
         'end_date',
         'actual_beneficiaries',
         'expected_beneficiaries',
     ];
 
-    // Optionally, define the date format if needed (for dates like start_date and end_date)
-    protected $dates = ['start_date', 'end_date'];
+    // Automatically cast start_date and end_date to Carbon instances
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
+    ];
 
-    // Optionally, you can add relationships or additional methods here as needed
+    // Define relationships or additional methods if needed
+    public function assignedOrg()
+    {
+        return $this->belongsTo(User::class, 'assigned_org_id');
+    }
 }

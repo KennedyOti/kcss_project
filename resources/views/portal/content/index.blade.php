@@ -11,6 +11,24 @@
             </div>
         @endif
 
+        <!-- Filter Form -->
+        <form method="GET" action="{{ route('pages.index') }}" class="mb-4">
+            <div class="row g-2">
+                <div class="col-md-4">
+                    <input type="text" name="title" class="form-control" placeholder="Search by Title"
+                        value="{{ $filters['title'] ?? '' }}">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="meta_title" class="form-control" placeholder="Search by Meta Title"
+                        value="{{ $filters['meta_title'] ?? '' }}">
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Pages Table -->
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -20,7 +38,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($pages as $page)
+                @forelse ($pages as $page)
                     <tr>
                         <td>{{ $page->title }}</td>
                         <td>{{ $page->meta_title }}</td>
@@ -34,8 +52,19 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="3" class="text-center">No pages found.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
+
+        <!-- Pagination -->
+        @if ($pages->hasPages())
+            <div class="mt-3">
+                {{ $pages->links('pagination::bootstrap-5') }}
+            </div>
+        @endif
     </div>
 @endsection

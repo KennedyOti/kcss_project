@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Activity;
 
 class RegisterActivityController extends Controller
 {
-    // Method to display the form for creating a new activity
+    /**
+     * Display the form for creating a new activity.
+     */
     public function create()
     {
         return view('portal.activities.create');
     }
 
-    // Method to handle storing the new activity
+    /**
+     * Store a newly created activity in storage.
+     */
     public function store(Request $request)
     {
         // Validate the form input
@@ -27,18 +32,22 @@ class RegisterActivityController extends Controller
             'expected_beneficiaries' => 'required|integer|min:0',
         ]);
 
-        // Create a new activity in the database
-        Activity::create([
-            'activity_name' => $validated['activity_name'],
-            'activity_description' => $validated['activity_description'],
-            'location' => $validated['location'],
-            'start_date' => $validated['start_date'],
-            'end_date' => $validated['end_date'],
-            'actual_beneficiaries' => $validated['actual_beneficiaries'],
-            'expected_beneficiaries' => $validated['expected_beneficiaries'],
-        ]);
+        // Add the organization field
+        $validated['organization'] = Auth::user()->name ?? 'Default Organization';
 
-        // Redirect back to the activity creation form with a success message
+        // Create a new activity in the database
+        Activity::create($validated);
+
+        // Redirect to the create form with a success message
         return redirect()->route('activities.create')->with('success', 'Activity registered successfully.');
+    }
+
+    /**
+     * Display a listing of all activities.
+     */
+    public function index()
+    {
+        $activities = Activity::orderBy('start_date', 'desc')->paginate(10);
+        return view('portal.activities.index', compact('activities'));
     }
 }

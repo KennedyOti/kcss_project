@@ -9,13 +9,42 @@ use Illuminate\Http\Request;
 class ManageReportsController extends Controller
 {
     /**
-     * Display a listing of the reports.
+     * Display a listing of the reports with filters.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Ensure the relationship 'user' is used correctly, and data is fetched with 'user_id'
-        $reports = Report::with('user')->orderBy('created_at', 'desc')->get();
-        return view('portal.reports.index', compact('reports'));
+        // Get filter parameters
+        $filters = [
+            'title' => $request->input('title'),
+            'status' => $request->input('status'),
+            'user_name' => $request->input('user_name'),
+            'date_from' => $request->input('date_from'),
+            'date_to' => $request->input('date_to'),
+        ];
+
+        // Query with filters
+        $reports = Report::with('user')
+            ->when($filters['title'], function ($query, $title) {
+                $query->where('title', 'like', "%{$title}%");
+            })
+            ->when($filters['status'], function ($query, $status) {
+                $query->where('status', $status);
+            })
+            ->when($filters['user_name'], function ($query, $userName) {
+                $query->whereHas('user', function ($q) use ($userName) {
+                    $q->where('name', 'like', "%{$userName}%");
+                });
+            })
+            ->when($filters['date_from'], function ($query, $dateFrom) {
+                $query->whereDate('date_of_report', '>=', $dateFrom);
+            })
+            ->when($filters['date_to'], function ($query, $dateTo) {
+                $query->whereDate('date_of_report', '<=', $dateTo);
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('portal.reports.index', compact('reports', 'filters'));
     }
 
     /**
@@ -23,7 +52,6 @@ class ManageReportsController extends Controller
      */
     public function show($id)
     {
-        // Use the correct relationship name 'user' as defined in the Report model
         $report = Report::with('user')->findOrFail($id);
         return view('portal.reports.show', compact('report'));
     }
@@ -83,7 +111,7 @@ class ManageReportsController extends Controller
 
         // Optionally delete the associated file from storage
         if ($report->file_path) {
-            Storage::delete($report->file_path); // Use Storage facade correctly
+            Storage::delete($report->file_path);
         }
 
         $report->delete();

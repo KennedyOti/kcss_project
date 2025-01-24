@@ -55,7 +55,7 @@
                     <!-- Logo Header -->
                     <div class="logo-header" data-background-color="dark">
                         <a href="{{ route('dashboard') }}" class="logo">
-                            <img src="{{ asset('assets/images/logo.png') }}" alt="navbar brand" class="navbar-brand"
+                            <img src="{{ asset('assets/images/logo1.png') }}" alt="navbar brand" class="navbar-brand"
                                 height="50" />
                         </a>
                         <div class="nav-toggle">
@@ -664,20 +664,20 @@
                         <nav class="pull-left">
                             <ul class="nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="http://www.dijisoftwares.com">
-                                        Portal Developed by Dijisoftwares Ict Hub
+                                    <a class="nav-link" href="#">
+                                        Portal Developed by MPB Portal Software Team
                                     </a>
                                 </li>
 
                             </ul>
                         </nav>
                         <div class="copyright">
-                            2025, KCSS Portal <i class="fa fa-heart heart text-danger"></i> by
-                            <a href="http://www.dijisoftwares.com">Dijisoftwares Ict Hub</a>
+                            2025, MPB Portal <i class="fa fa-heart heart text-danger"></i> by
+                            <a href="#">MPB Portal Software Team</a>
                         </div>
                         <div>
 
-                            <a target="_blank" href="https://dijisoftwares.com/">KCSS Portal</a>.
+                            <a target="_blank" href="#">MPB Portal</a>.
                         </div>
                     </div>
                 </footer>

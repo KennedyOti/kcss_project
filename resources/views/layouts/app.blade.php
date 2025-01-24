@@ -36,8 +36,8 @@
     <header class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container">
             <a href="{{ route('home') }}" class="navbar-brand">
-
-                KCSS Project System
+                <img src="{{ asset('assets/images/logo1.png') }}" alt="KCSS Logo" height="40">
+                MBS Project System
             </a>
             <div>
                 <a href="{{ route('login') }}" class="btn btn-outline-primary me-2">Login</a>

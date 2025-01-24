@@ -9,12 +9,45 @@ use Illuminate\Http\Request;
 class ManageCasesController extends Controller
 {
     /**
-     * Display a listing of the cases.
+     * Display a listing of the cases with filters.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cases = Cases::with('assignedStaff')->paginate(10);
-        return view('portal.cases.index', compact('cases'));
+        // Get filter parameters
+        $filters = [
+            'client_name' => $request->input('client_name'),
+            'description' => $request->input('description'),
+            'assigned_staff' => $request->input('assigned_staff'),
+            'status' => $request->input('status'),
+            'start_date_from' => $request->input('start_date_from'),
+            'start_date_to' => $request->input('start_date_to'),
+        ];
+
+        // Query with filters
+        $cases = Cases::with('assignedStaff')
+            ->when($filters['client_name'], function ($query, $clientName) {
+                $query->where('client_name', 'like', "%{$clientName}%");
+            })
+            ->when($filters['description'], function ($query, $description) {
+                $query->where('description', 'like', "%{$description}%");
+            })
+            ->when($filters['assigned_staff'], function ($query, $staffId) {
+                $query->where('assigned_staff_id', $staffId);
+            })
+            ->when($filters['status'], function ($query, $status) {
+                $query->where('status', $status);
+            })
+            ->when($filters['start_date_from'], function ($query, $dateFrom) {
+                $query->whereDate('start_date', '>=', $dateFrom);
+            })
+            ->when($filters['start_date_to'], function ($query, $dateTo) {
+                $query->whereDate('start_date', '<=', $dateTo);
+            })
+            ->paginate(10);
+
+        $staffMembers = User::all(); // Fetch staff members for the filter dropdown
+
+        return view('portal.cases.index', compact('cases', 'filters', 'staffMembers'));
     }
 
     /**
@@ -63,10 +96,13 @@ class ManageCasesController extends Controller
 
         return redirect()->route('cases.index')->with('success', 'Case deleted successfully.');
     }
-    // Show functionality
+
+    /**
+     * Show the details of a specific case.
+     */
     public function show($id)
     {
-        $case = Cases::findOrFail($id);  // Find the case by ID or throw a 404 error
-        return view('portal.cases.show', compact('case'));  // Return the 'cases.show' view with the case data
+        $case = Cases::findOrFail($id);
+        return view('portal.cases.show', compact('case'));
     }
 }

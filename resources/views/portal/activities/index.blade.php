@@ -12,6 +12,43 @@
 
         <h2 class="mb-4">Manage Activities</h2>
 
+        <!-- Filter Form -->
+        <form method="GET" action="{{ route('activities.index') }}" class="mb-4">
+            <div class="row g-2">
+                <div class="col-md-3">
+                    <input type="text" name="activity_name" class="form-control" placeholder="Activity Name"
+                        value="{{ $filters['activity_name'] ?? '' }}">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="organization" class="form-control" placeholder="Organization"
+                        value="{{ $filters['organization'] ?? '' }}">
+                </div>
+                <div class="col-md-2">
+                    <select name="status" class="form-control">
+                        <option value="">All Statuses</option>
+                        <option value="in_progress" {{ ($filters['status'] ?? '') == 'in_progress' ? 'selected' : '' }}>
+                            In Progress
+                        </option>
+                        <option value="completed" {{ ($filters['status'] ?? '') == 'completed' ? 'selected' : '' }}>
+                            Completed
+                        </option>
+                        <option value="cancelled" {{ ($filters['status'] ?? '') == 'cancelled' ? 'selected' : '' }}>
+                            Cancelled
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input type="date" name="date_from" class="form-control" value="{{ $filters['date_from'] ?? '' }}">
+                </div>
+                <div class="col-md-2">
+                    <input type="date" name="date_to" class="form-control" value="{{ $filters['date_to'] ?? '' }}">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </form>
+
         <!-- Recent Activities Section -->
         <div class="mb-5">
             <h3>Recent Activities</h3>
@@ -19,28 +56,34 @@
                 <thead>
                     <tr>
                         <th>Activity Name</th>
-                        <th>Date</th>
                         <th>Organization</th>
+                        <th>Location</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($recentActivities as $activity)
+                    @forelse ($recentActivities as $activity)
                         <tr>
                             <td>{{ $activity->activity_name }}</td>
-                            <td>{{ $activity->created_at->format('d M Y') }}</td>
-                            <td>{{ $activity->organization_name ?? 'N/A' }}</td>
+                            <td>{{ $activity->organization }}</td>
+                            <td>{{ $activity->location }}</td>
+                            <td>{{ \Carbon\Carbon::parse($activity->start_date)->format('d M Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($activity->end_date)->format('d M Y') }}</td>
                             <td>
                                 <span
-                                    class="badge text-dark 
-                                @if ($activity->status == 'in progress') bg-warning 
-                                @elseif ($activity->status == 'completed') bg-success @endif">
-                                    {{ ucfirst($activity->status) }}
+                                    class="badge 
+                                @if ($activity->status == 'in_progress') bg-warning 
+                                @elseif ($activity->status == 'completed') bg-success 
+                                @elseif ($activity->status == 'cancelled') bg-danger @endif">
+                                    {{ ucfirst(str_replace('_', ' ', $activity->status)) }}
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ route('activities.show', $activity->id) }}" class="btn btn-info btn-sm">View</a>
+                                <a href="{{ route('activities.show', $activity->id) }}"
+                                    class="btn btn-info btn-sm">View</a>
                                 <a href="{{ route('activities.edit', $activity->id) }}"
                                     class="btn btn-warning btn-sm">Edit</a>
                                 <form action="{{ route('activities.destroy', $activity->id) }}" method="POST"
@@ -52,43 +95,11 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Pending Requests Section -->
-        <div>
-            <h3>Pending Requests</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Activity Name</th>
-                        <th>Date</th>
-                        <th>Organization</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($pendingRequests as $request)
+                    @empty
                         <tr>
-                            <td>{{ $request->activity_name }}</td>
-                            <td>{{ $request->created_at->format('d M Y') }}</td>
-                            <td>{{ $request->organization_name ?? 'N/A' }}</td>
-                            <td>
-                                <form action="{{ route('activities.approve', $request->id) }}" method="POST"
-                                    style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-success btn-sm">Approve</button>
-                                </form>
-                                <form action="{{ route('activities.decline', $request->id) }}" method="POST"
-                                    style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm">Decline</button>
-                                </form>
-                            </td>
+                            <td colspan="7" class="text-center">No recent activities found.</td>
                         </tr>
-                    @endforeach
+                    @endforelse
                 </tbody>
             </table>
         </div>
