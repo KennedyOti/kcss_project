@@ -37,7 +37,7 @@
         <div class="container">
             <a href="{{ route('home') }}" class="navbar-brand">
                 <img src="{{ asset('assets/images/logo1.png') }}" alt="KCSS Logo" height="40">
-                MBS Project System
+                MBS Portal
             </a>
             <div>
                 <a href="{{ route('login') }}" class="btn btn-outline-primary me-2">Login</a>
