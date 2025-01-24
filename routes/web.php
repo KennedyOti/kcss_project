@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function () {
 
 
     // Case Management Routes
-    Route::middleware('checkrole:admin,organization')->group(function () {
+    Route::middleware('checkrole:admin,organization,user')->group(function () {
         Route::get('/cases', [ManageCasesController::class, 'index'])->name('cases.index');
         Route::get('/cases/create', [CreateCaseController::class, 'create'])->name('cases.create');
         Route::post('/cases', [CreateCaseController::class, 'store'])->name('cases.store');
@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/cases/{id}', [ManageCasesController::class, 'show'])->name('cases.show');  // Add this route
     });
 
-    Route::middleware('checkrole:admin,organization')->group(function () {
+    Route::middleware('checkrole:admin,organization,user')->group(function () {
         // Routes for managing reports (ManageReportsController)
         Route::get('/reports', [ManageReportsController::class, 'index'])->name('reports.index');
         Route::get('/reports/create', [CreateReportController::class, 'create'])->name('reports.create');
