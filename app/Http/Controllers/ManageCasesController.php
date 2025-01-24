@@ -63,4 +63,10 @@ class ManageCasesController extends Controller
 
         return redirect()->route('cases.index')->with('success', 'Case deleted successfully.');
     }
+    // Show functionality
+    public function show($id)
+    {
+        $case = Cases::findOrFail($id);  // Find the case by ID or throw a 404 error
+        return view('portal.cases.show', compact('case'));  // Return the 'cases.show' view with the case data
+    }
 }

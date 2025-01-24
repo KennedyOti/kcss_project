@@ -35,7 +35,7 @@
     <!-- Header -->
     <header class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container">
-            <a href="#" class="navbar-brand">
+            <a href="{{ route('home') }}" class="navbar-brand">
 
                 KCSS Project System
             </a>

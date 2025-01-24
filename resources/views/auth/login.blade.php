@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <br><br><br>
+    <br>
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card shadow p-4 w-100" style="max-width: 400px;">
             <h2 class="text-center mb-4">Login</h2>

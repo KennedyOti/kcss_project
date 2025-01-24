@@ -7,7 +7,7 @@
         <div class="container">
             <h1 class="display-4">Welcome to KCSS Project System</h1>
             <p class="lead">A centralized hub for managing activities, cases, and reports efficiently.</p>
-            <a href="signup.html" class="btn btn-primary btn-lg">Get Started</a>
+            <a href="{{ route('register') }}" class="btn btn-primary btn-lg">Get Started</a>
         </div>
     </section>
 

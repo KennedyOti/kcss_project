@@ -33,7 +33,7 @@
                             <td>{{ $activity->organization_name ?? 'N/A' }}</td>
                             <td>
                                 <span
-                                    class="badge 
+                                    class="badge text-dark 
                                 @if ($activity->status == 'in progress') bg-warning 
                                 @elseif ($activity->status == 'completed') bg-success @endif">
                                     {{ ucfirst($activity->status) }}

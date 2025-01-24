@@ -4,22 +4,32 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CreateCaseController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\ManageCasesController;
+use App\Http\Controllers\CreateReportController;
+use App\Http\Controllers\ManageReportsController;
 use App\Http\Controllers\ManageActivitiesController;
 use App\Http\Controllers\RegisterActivityController;
 
-//Public Routes
+
+
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Authenticated Routes
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/users', [UsersController::class, 'index'])->name('user.index');
+
+
+
+
+    Route::middleware('checkrole:admin,organization')->group(function () {
+        Route::get('/users', [UsersController::class, 'index'])->name('user.index');
+    });
     // Activity Routes
-    Route::middleware('checkrole:admin')->group(function () {
+    Route::middleware('checkrole:admin,organization')->group(function () {
         // Route to display the form to register a new activity
         Route::get('/activities/create', [RegisterActivityController::class, 'create'])->name('activities.create');
 
@@ -29,8 +39,8 @@ Route::middleware('auth')->group(function () {
 
 
     //Pages Management Routes
-    Route::middleware('checkrole:admin,')->group(function () {
-        Route::get('/', [PageController::class, 'index'])->name('pages.index');
+    Route::middleware('checkrole:admin,organization')->group(function () {
+        Route::get('/list_pages', [PageController::class, 'index'])->name('pages.index');
         Route::get('/create', [PageController::class, 'create'])->name('pages.create');
         Route::post('/create', [PageController::class, 'store'])->name('pages.store');
         Route::get('/edit/{page}', [PageController::class, 'edit'])->name('pages.edit');
@@ -41,7 +51,7 @@ Route::middleware('auth')->group(function () {
 
 
     //Activity Management Routes
-    Route::middleware('checkrole:admin')->group(function () {
+    Route::middleware('checkrole:admin,organization')->group(function () {
         Route::get('/activities', [ManageActivitiesController::class, 'index'])->name('activities.index');
         Route::get('/activities/{id}', [ManageActivitiesController::class, 'show'])->name('activities.show');
         Route::get('/activities/{id}/edit', [ManageActivitiesController::class, 'edit'])->name('activities.edit');
@@ -52,15 +62,39 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    //Case Management Routes
-    Route::middleware('checkrole:admin')->group(function () {
+    // Case Management Routes
+    Route::middleware('checkrole:admin,organization')->group(function () {
         Route::get('/cases', [ManageCasesController::class, 'index'])->name('cases.index');
         Route::get('/cases/create', [CreateCaseController::class, 'create'])->name('cases.create');
         Route::post('/cases', [CreateCaseController::class, 'store'])->name('cases.store');
         Route::get('/cases/{id}/edit', [ManageCasesController::class, 'edit'])->name('cases.edit');
         Route::put('/cases/{id}', [ManageCasesController::class, 'update'])->name('cases.update');
         Route::delete('/cases/{id}', [ManageCasesController::class, 'destroy'])->name('cases.destroy');
+        Route::get('/cases/{id}', [ManageCasesController::class, 'show'])->name('cases.show');  // Add this route
     });
+
+    Route::middleware('checkrole:admin,organization')->group(function () {
+        // Routes for managing reports (ManageReportsController)
+        Route::get('/reports', [ManageReportsController::class, 'index'])->name('reports.index');
+        Route::get('/reports/create', [CreateReportController::class, 'create'])->name('reports.create');
+        Route::post('/reports', [CreateReportController::class, 'store'])->name('reports.store');
+        Route::get('/reports/{id}', [ManageReportsController::class, 'show'])->name('reports.show');
+        Route::get('/reports/{id}/edit', [ManageReportsController::class, 'edit'])->name('reports.edit');
+        Route::put('/reports/{id}', [ManageReportsController::class, 'update'])->name('reports.update');
+        Route::delete('/reports/{id}', [ManageReportsController::class, 'destroy'])->name('reports.destroy');
+
+        // Additional routes for updating the report status (ManageReportsController)
+        Route::put('/reports/{id}/status', [ManageReportsController::class, 'updateStatus'])->name('reports.update-status'); // Correct route name here
+    });
+
+    // Statistics Routes
+    Route::middleware('checkrole:admin,organization')->group(function () {
+        Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics.index');
+        Route::post('/statistics/download', [StatisticsController::class, 'downloadReport'])->name('statistics.download');
+    });
+
+
+
 
 
 
