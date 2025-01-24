@@ -85,6 +85,8 @@
                                         <td>
                                             <a href="{{ route('reports.show', $report->id) }}"
                                                 class="btn btn-sm btn-info">View</a>
+                                            <a href="{{ route('reports.edit', $report->id) }}"
+                                                class="btn btn-sm btn-warning">Edit</a>
                                             <form action="{{ route('reports.update-status', $report->id) }}" method="POST"
                                                 style="display:inline-block;">
                                                 @csrf
@@ -115,6 +117,13 @@
                                 @endforelse
                             </tbody>
                         </table>
+
+                        <!-- Pagination -->
+                        @if ($reports->hasPages())
+                            <div class="mt-3">
+                                {{ $reports->links('pagination::bootstrap-5') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

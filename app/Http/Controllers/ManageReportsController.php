@@ -57,21 +57,31 @@ class ManageReportsController extends Controller
     }
 
     /**
+     * Show the form for editing a specific report.
+     */
+    public function edit($id)
+    {
+        $report = Report::findOrFail($id);
+        return view('portal.reports.edit', compact('report'));
+    }
+
+    /**
      * Update the report details.
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
             'date_of_report' => 'required|date',
+            'file' => 'nullable|file|mimes:pdf,doc,docx|max:10240', // Allow optional file upload
         ]);
 
         $report = Report::findOrFail($id);
-        $report->title = $request->input('title');
-        $report->date_of_report = $request->input('date_of_report');
+        $report->title = $validated['title'];
+        $report->date_of_report = $validated['date_of_report'];
 
         if ($request->hasFile('file')) {
-            // Delete the old file if it exists
+            // Delete old file if it exists
             if ($report->file_path) {
                 Storage::delete($report->file_path);
             }
@@ -91,12 +101,12 @@ class ManageReportsController extends Controller
      */
     public function updateStatus(Request $request, $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'status' => 'required|in:approved,declined',
         ]);
 
         $report = Report::findOrFail($id);
-        $report->status = $request->input('status');
+        $report->status = $validated['status'];
         $report->save();
 
         return redirect()->route('reports.index')->with('success', 'Report status updated successfully.');
@@ -109,7 +119,7 @@ class ManageReportsController extends Controller
     {
         $report = Report::findOrFail($id);
 
-        // Optionally delete the associated file from storage
+        // Delete associated file if it exists
         if ($report->file_path) {
             Storage::delete($report->file_path);
         }
