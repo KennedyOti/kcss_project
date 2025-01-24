@@ -5,7 +5,7 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
-            <h1 class="display-4">Welcome to KCSS Project System</h1>
+            <h1 class="display-4">WELCOME TO MPB PORTAL</h1>
             <p class="lead">A centralized hub for managing activities, cases, and reports efficiently.</p>
             <a href="{{ route('register') }}" class="btn btn-primary btn-lg">Get Started</a>
         </div>

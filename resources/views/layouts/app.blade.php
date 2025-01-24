@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KCSS Project System</title>
+    <title>MPB Project System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .hero-section {
@@ -37,7 +37,7 @@
         <div class="container">
             <a href="{{ route('home') }}" class="navbar-brand">
                 <img src="{{ asset('assets/images/logo1.png') }}" alt="KCSS Logo" height="40">
-                MBS Portal
+                MPB Portal
             </a>
             <div>
                 <a href="{{ route('login') }}" class="btn btn-outline-primary me-2">Login</a>
@@ -51,7 +51,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 KCSS Project System. All rights reserved.</p>
+            <p>&copy; 2025 MPB Portal. All rights reserved.</p>
         </div>
     </footer>
 
