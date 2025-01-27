@@ -28,7 +28,7 @@
                             <!-- Most Active Cities (Map or List) -->
                             <div class="col-md-6">
                                 <h5>Most Active Cities</h5>
-                                <div id="cities-map" style="height: 400px;"></div> <!-- You can use a map library here -->
+                                <div id="cities-map" style="height: 400px;"></div> <!-- Map container -->
                             </div>
 
                             <!-- Most Active Organizations (Bar Chart) -->
@@ -55,9 +55,100 @@
         </div>
     </div>
 
+    <!-- Include Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script> <!-- Ensure Chart.js is correctly loaded -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.js"></script>
+
+    <!-- JavaScript for Charts -->
     <script>
-        // Your JavaScript code remains unchanged
+        // Activities per Month Line Chart
+        var activitiesData = @json($activitiesPerMonth);
+        var ctxActivities = document.getElementById('activities-chart').getContext('2d');
+        var activitiesChart = new Chart(ctxActivities, {
+            type: 'line',
+            data: {
+                labels: activitiesData.map(activity => 'Month ' + activity.month),
+                datasets: [{
+                    label: 'Total Activities',
+                    data: activitiesData.map(activity => activity.total),
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true
+                    }
+                }
+            }
+        });
+
+        // Case Status Pie Chart
+        var caseStatusData = @json($caseStatuses);
+        var ctxCaseStatus = document.getElementById('case-status-chart').getContext('2d');
+        var caseStatusChart = new Chart(ctxCaseStatus, {
+            type: 'pie',
+            data: {
+                labels: caseStatusData.map(status => status.status),
+                datasets: [{
+                    data: caseStatusData.map(status => status.total),
+                    backgroundColor: ['#FF9999', '#FFCC00', '#66CC66', '#6699FF', '#FF6666']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true
+                    }
+                }
+            }
+        });
+
+        // Most Active Organizations Bar Chart
+        var organizationsData = @json($mostActiveOrganizations);
+        var ctxOrganizations = document.getElementById('organizations-bar-chart').getContext('2d');
+        var organizationsChart = new Chart(ctxOrganizations, {
+            type: 'bar',
+            data: {
+                labels: organizationsData.map(org => org.organization_name || 'Org ' + org.user_id),
+                datasets: [{
+                    label: 'Activity Count',
+                    data: organizationsData.map(org => org.total),
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true
+                    }
+                }
+            }
+        });
+
+        // Most Active Cities Map
+        var citiesData = @json($mostActiveCities);
+        var map = L.map('cities-map').setView([0, 0], 2); // Initialize map globally
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        citiesData.forEach(function(city) {
+            L.marker([city.latitude, city.longitude]) // Requires latitude and longitude in the data
+                .addTo(map)
+                .bindPopup('<b>' + city.location + '</b><br>Activities: ' + city.total);
+        });
     </script>
 @endsection
