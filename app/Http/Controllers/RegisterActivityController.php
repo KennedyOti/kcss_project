@@ -41,13 +41,4 @@ class RegisterActivityController extends Controller
         // Redirect to the create form with a success message
         return redirect()->route('activities.create')->with('success', 'Activity registered successfully.');
     }
-
-    /**
-     * Display a listing of all activities.
-     */
-    public function index()
-    {
-        $activities = Activity::orderBy('start_date', 'desc')->paginate(10);
-        return view('portal.activities.index', compact('activities'));
-    }
 }

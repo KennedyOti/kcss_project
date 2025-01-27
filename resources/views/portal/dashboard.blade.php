@@ -38,7 +38,7 @@
                             <div class="row align-items-center">
                                 <div class="col-icon">
                                     <div class="icon-big text-center icon-info bubble-shadow-small">
-                                        <i class="fa fa-tasks"></i>
+                                        <i class="fas fa-list"></i>
                                     </div>
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
@@ -58,7 +58,7 @@
                             <div class="row align-items-center">
                                 <div class="col-icon">
                                     <div class="icon-big text-center icon-success bubble-shadow-small">
-                                        <i class="fa fa-home"></i>
+                                        <i class="fas fa-folder"></i>
                                     </div>
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
@@ -77,8 +77,8 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-icon">
-                                    <div class="icon-big text-center icon-success bubble-shadow-small">
-                                        <i class="fa fa-home"></i>
+                                    <div class="icon-big text-center icon-warning bubble-shadow-small">
+                                        <i class="fas fa-clock"></i>
                                     </div>
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
@@ -98,7 +98,7 @@
                             <div class="row align-items-center">
                                 <div class="col-icon">
                                     <div class="icon-big text-center icon-success bubble-shadow-small">
-                                        <i class="fa fa-home"></i>
+                                        <i class="fas fa-check"></i>
                                     </div>
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
@@ -118,7 +118,7 @@
                             <div class="row align-items-center">
                                 <div class="col-icon">
                                     <div class="icon-big text-center icon-secondary bubble-shadow-small">
-                                        <i class="fa fa-briefcase"></i>
+                                        <i class="fas fa-file-alt"></i>
                                     </div>
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
@@ -138,7 +138,7 @@
                             <div class="row align-items-center">
                                 <div class="col-icon">
                                     <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                        <i class="fa fa-flag"></i>
+                                        <i class="fas fa-thumbs-up"></i>
                                     </div>
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
@@ -157,8 +157,8 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-icon">
-                                    <div class="icon-big text-center icon-success bubble-shadow-small">
-                                        <i class="fa fa-flag"></i>
+                                    <div class="icon-big text-center icon-danger bubble-shadow-small">
+                                        <i class="fas fa-thumbs-down"></i>
                                     </div>
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
@@ -177,7 +177,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-icon">
-                                    <div class="icon-big text-center icon-info bubble-shadow-small">
+                                    <div class="icon-big text-center icon-primary bubble-shadow-small">
                                         <i class="fa fa-tasks"></i>
                                     </div>
                                 </div>
@@ -197,7 +197,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-icon">
-                                    <div class="icon-big text-center icon-success bubble-shadow-small">
+                                    <div class="icon-big text-center icon-info bubble-shadow-small">
                                         <i class="fa fa-home"></i>
                                     </div>
                                 </div>
@@ -217,8 +217,8 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-icon">
-                                    <div class="icon-big text-center icon-success bubble-shadow-small">
-                                        <i class="fa fa-home"></i>
+                                    <div class="icon-big text-center icon-warning bubble-shadow-small">
+                                        <i class="fa fa-exclamation-circle"></i>
                                     </div>
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
@@ -238,7 +238,7 @@
                             <div class="row align-items-center">
                                 <div class="col-icon">
                                     <div class="icon-big text-center icon-success bubble-shadow-small">
-                                        <i class="fa fa-home"></i>
+                                        <i class="fa fa-check-circle"></i>
                                     </div>
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
@@ -277,27 +277,7 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-icon">
-                                    <div class="icon-big text-center icon-primary bubble-shadow-small">
-                                        <i class="fa fa-flag"></i>
-                                    </div>
-                                </div>
-                                <div class="col col-stats ms-3 ms-sm-0">
-                                    <div class="numbers">
-                                        <p class="card-category">Approved Reports</p>
-                                        <h4 class="card-title">{{ $data['approved_reports'] }}</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 col-md-3">
-                    <div class="card card-stats card-round">
-                        <div class="card-body">
-                            <div class="row align-items-center">
-                                <div class="col-icon">
-                                    <div class="icon-big text-center icon-success bubble-shadow-small">
+                                    <div class="icon-big text-center icon-danger bubble-shadow-small">
                                         <i class="fa fa-flag"></i>
                                     </div>
                                 </div>
@@ -311,6 +291,26 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="card card-stats card-round">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-icon">
+                                    <div class="icon-big text-center icon-info bubble-shadow-small">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+                                <div class="col col-stats ms-3 ms-sm-0">
+                                    <div class="numbers">
+                                        <p class="card-category">Approved Reports</p>
+                                        <h4 class="card-title">{{ $data['approved_reports'] }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @else
                 <div class="col-sm-6 col-md-3">
                     <div class="card card-stats card-round">
@@ -318,17 +318,15 @@
                             <div class="row align-items-center">
                                 <div class="col-icon">
                                     <div class="icon-big text-center icon-success bubble-shadow-small">
-                                        <i class="fa fa-home"></i>
+                                        <i class="fa fa-tasks"></i> <!-- Icon for Total Activities -->
                                     </div>
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
-                                        <p class="card-category">My Reports</p>
-                                        <h4 class="card-title">456</h4>
-                                        <!-- Display total sales dynamically -->
+                                        <p class="card-category">Total Activities</p>
+                                        <h4 class="card-title">{{ $data['total_activities'] }}</h4>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -339,18 +337,16 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-icon">
-                                    <div class="icon-big text-center icon-success bubble-shadow-small">
-                                        <i class="fa fa-home"></i>
+                                    <div class="icon-big text-center icon-danger bubble-shadow-small">
+                                        <i class="fa fa-briefcase-medical"></i> <!-- Icon for Total Cases -->
                                     </div>
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
-                                        <p class="card-category">My Cases</p>
-                                        <h4 class="card-title">456</h4>
-                                        <!-- Display total sales dynamically -->
+                                        <p class="card-category">Total Cases</p>
+                                        <h4 class="card-title">{{ $data['total_cases'] }}</h4>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -361,18 +357,16 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-icon">
-                                    <div class="icon-big text-center icon-success bubble-shadow-small">
-                                        <i class="fa fa-home"></i>
+                                    <div class="icon-big text-center icon-warning bubble-shadow-small">
+                                        <i class="fa fa-file-alt"></i> <!-- Icon for Total Reports -->
                                     </div>
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
-                                        <p class="card-category">Activities</p>
-                                        <h4 class="card-title">456</h4>
-                                        <!-- Display total sales dynamically -->
+                                        <p class="card-category">Total Reports</p>
+                                        <h4 class="card-title">{{ $data['total_reports'] }}</h4>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -383,25 +377,22 @@
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col-icon">
-                                    <div class="icon-big text-center icon-success bubble-shadow-small">
-                                        <i class="fa fa-home"></i>
+                                    <div class="icon-big text-center icon-primary bubble-shadow-small">
+                                        <i class="fa fa-check-circle"></i> <!-- Icon for Approved Reports -->
                                     </div>
                                 </div>
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
-                                        <p class="card-category">Reports</p>
-                                        <h4 class="card-title">456</h4>
-                                        <!-- Display total sales dynamically -->
+                                        <p class="card-category">Approved Reports</p>
+                                        <h4 class="card-title">{{ $data['approved_reports'] }}</h4>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
 
-        </div>
-        <div class="row">
+                <div class="row">
             @endif
         </div>
         <div class="row">
